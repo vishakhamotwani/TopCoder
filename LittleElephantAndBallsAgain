@@ -1,0 +1,23 @@
+#include<stdlib.h>
+#include<string>
+using namespace std;
+class LittleElephantAndBallsAgain{
+	public:
+	int getNumber(string);
+};
+//Simply find the length of the consecutive similar characters appearing in the string
+int LittleElephantAndBallsAgain::getNumber(string S){
+	int final = 0;//maximum occurences of any character
+	int n = S.length();//total length of the string
+	int count = 1;//count of each character, minimum 1
+	for(int i=0; i+1<n; i++){//checking for i+1th character so that it does not go beyond the last character
+		if(S[i]!=S[i+1]){//Comparing each character with its immediate next character
+			final=max(final,count); 
+			count = 1;//If its not same then reset the counter for the next character to 1
+		}else
+			count++;//increment the counter for that particular character in consideration
+	}
+	final=max(final,count);//If all the characters in the string are similar, eg. 'RRRRR'
+	return n-final;	//whatever the maximum count is of any of the consecutive chars the rest of the
+	//chars need to be removed
+}
